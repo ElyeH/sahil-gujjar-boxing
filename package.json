@@ -1,0 +1,23 @@
+{
+  "name": "sahil-gujjar-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "images": "node scripts/build-images.mjs",
+    "assets": "node scripts/render-assets.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "contrast": "node scripts/contrast.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.5"
+  }
+}

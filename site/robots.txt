@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://elyeh.github.io/sahil-gujjar-boxing/sitemap.xml
