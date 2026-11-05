@@ -101,9 +101,12 @@
 
   /* ---------- Preselect interest from CTAs ---------- */
   const interest = $('#f-interest');
-  $$('[data-interest="program"]').forEach((link) =>
+  $$('[data-interest]').forEach((link) =>
     link.addEventListener('click', () => {
-      if (interest && !interest.value) interest.selectedIndex = 1;
+      if (!interest) return;
+      const want = link.dataset.interest;
+      if (want === 'program') interest.selectedIndex = 1;
+      else interest.value = want;
     })
   );
 
@@ -238,7 +241,7 @@
     // Honeypot filled in: almost certainly a bot, so pretend it worked and send nothing.
     if (data.get('bot-field')) return showSuccess();
 
-    // data-provider on the form: "whatsapp" (no account needed), "formspree" (+ data-endpoint) or "netlify".
+    // data-provider on the form: "formsubmit" or "formspree" (+ data-endpoint), "whatsapp" or "netlify".
     const provider = form.dataset.provider || 'netlify';
 
     if (provider === 'whatsapp') {
@@ -261,8 +264,15 @@
     submit.disabled = true;
     try {
       if (!isLocal) {
+        if (provider === 'formsubmit') {
+          data.delete('form-name');
+          data.delete('bot-field');
+          data.append('_subject', `New booking request from ${data.get('name')}`);
+          data.append('_template', 'table');
+          data.append('_captcha', 'false');
+        }
         const res =
-          provider === 'formspree'
+          provider === 'formspree' || provider === 'formsubmit'
             ? await fetch(form.dataset.endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: data })
             : await fetch('/', {
                 method: 'POST',
@@ -270,6 +280,11 @@
                 body: new URLSearchParams(data).toString(),
               });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        // FormSubmit answers 200 even on failure (e.g. before the inbox is activated).
+        if (provider === 'formsubmit') {
+          const body = await res.json().catch(() => ({}));
+          if (String(body.success) !== 'true') throw new Error(body.message || 'FormSubmit rejected the message');
+        }
       }
       wrap.hidden = true;
       success.hidden = false;

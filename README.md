@@ -21,9 +21,13 @@ The contact form shows its success message locally without sending anything. Rea
    git push -u origin main
    ```
 2. In the repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. If the first workflow run failed because Pages wasn't enabled yet, re-run it from the **Actions** tab.
-3. The site goes live at `https://elyeh.github.io/sahil-gujjar-boxing/`.
+3. The site lives at `https://wwwsgboxing.com/` (custom domain, set by `site/CNAME`).
 
-If the URL changes (different repo name or a custom domain), replace `https://elyeh.github.io/sahil-gujjar-boxing/` in `site/index.html`, `site/robots.txt` and `site/sitemap.xml`.
+### Custom domain (wwwsgboxing.com, registered at Squarespace)
+- Squarespace → Domains → wwwsgboxing.com → DNS: four `A` records on `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, and a `CNAME` on `www` → `elyeh.github.io` (delete Squarespace's default records first).
+- GitHub repo → Settings → Pages → Custom domain = `wwwsgboxing.com`, then tick **Enforce HTTPS** once it's offered.
+
+If the domain changes, update `site/CNAME` and replace `https://wwwsgboxing.com/` in `site/index.html`, `site/robots.txt` and `site/sitemap.xml`.
 
 ## Deploy (Netlify, alternative)
 
@@ -49,14 +53,15 @@ Replace `https://sahilgujjar.netlify.app` in `site/index.html` (canonical URL, O
 ## Contact form
 The `data-provider` attribute on `<form name="contact">` in `site/index.html` chooses where submissions go:
 
-- **`whatsapp`** (current): after validation, WhatsApp opens with the client's details already written as a message to Sahil (805-258-9402). The client only has to press send. This needs no account and works on GitHub Pages.
+- **`formsubmit`** (current): submissions are emailed to sgboxingcontact@gmail.com via https://formsubmit.co (no account). The first submission triggers a one-time activation email that must be confirmed. Set `data-endpoint` to `https://formsubmit.co/ajax/<email or FormSubmit's random alias>`.
+- **`whatsapp`**: after validation, WhatsApp opens with the client's details already written as a message to Sahil (805-258-9402). The client only has to press send. This needs no account and works on GitHub Pages.
 - **`formspree`**: submissions are emailed to Sahil. Create a free form at https://formspree.io (50 submissions/month) using his email, then set `data-provider="formspree"` and `data-endpoint="https://formspree.io/f/XXXXXXX"`. Works on GitHub Pages.
 - **`netlify`**: Netlify Forms. Only works when the site is hosted on Netlify.
 
 Spam protection: a hidden honeypot field (`bot-field`). If a bot fills it in, the form shows success and sends nothing.
 
 ## Editing content
-All copy is in `site/index.html`. Search for `TODO (client)` to find the places that need Sahil's confirmation.
+All copy is in `site/index.html`.
 
 ## Photos
 Put originals in `src-photos/`, map each file to a name in `scripts/build-images.mjs`, then run `npm run images`. This rotates, resizes (480–2000px), converts to WebP and strips metadata, including the GPS location phones embed. `src-photos/` is git-ignored for that reason.
