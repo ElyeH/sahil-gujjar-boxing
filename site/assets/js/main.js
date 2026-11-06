@@ -264,10 +264,12 @@
     submit.disabled = true;
     try {
       if (!isLocal) {
-        if (provider === 'formsubmit') {
+        if (provider === 'formspree' || provider === 'formsubmit') {
           data.delete('form-name');
           data.delete('bot-field');
           data.append('_subject', `New booking request from ${data.get('name')}`);
+        }
+        if (provider === 'formsubmit') {
           data.append('_template', 'table');
           data.append('_captcha', 'false');
         }

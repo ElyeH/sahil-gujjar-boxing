@@ -53,9 +53,9 @@ Replace `https://sahilgujjar.netlify.app` in `site/index.html` (canonical URL, O
 ## Contact form
 The `data-provider` attribute on `<form name="contact">` in `site/index.html` chooses where submissions go:
 
-- **`formsubmit`** (current): submissions are emailed to sgboxingcontact@gmail.com via https://formsubmit.co (no account). The first submission triggers a one-time activation email that must be confirmed. Set `data-endpoint` to `https://formsubmit.co/ajax/<email or FormSubmit's random alias>`.
+- **`formsubmit`**: submissions are emailed to sgboxingcontact@gmail.com via https://formsubmit.co (no account). The first submission triggers a one-time activation email that must be confirmed. Set `data-endpoint` to `https://formsubmit.co/ajax/<email or FormSubmit's random alias>`.
 - **`whatsapp`**: after validation, WhatsApp opens with the client's details already written as a message to Sahil (805-258-9402). The client only has to press send. This needs no account and works on GitHub Pages.
-- **`formspree`**: submissions are emailed to Sahil. Create a free form at https://formspree.io (50 submissions/month) using his email, then set `data-provider="formspree"` and `data-endpoint="https://formspree.io/f/XXXXXXX"`. Works on GitHub Pages.
+- **`formspree`** (current): submissions are emailed to sgboxingcontact@gmail.com via the Formspree form `https://formspree.io/f/mnpprwdp` (free plan, 50 submissions/month; account is sgboxingcontact@gmail.com).
 - **`netlify`**: Netlify Forms. Only works when the site is hosted on Netlify.
 
 Spam protection: a hidden honeypot field (`bot-field`). If a bot fills it in, the form shows success and sends nothing.
