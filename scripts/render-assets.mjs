@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
 import sharp from 'sharp';
 
-const hero = readFileSync('site/assets/img/hero-solo-1200.webp').toString('base64');
+const hero = readFileSync('scripts/og-photo.webp').toString('base64');
 const fonts = `<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&display=block" rel="stylesheet">`;
 
 const og = `<!doctype html><html><head>${fonts}<style>
@@ -22,7 +22,7 @@ const og = `<!doctype html><html><head>${fonts}<style>
   .price strong{font-family:'Bebas Neue';font-weight:400;font-size:50px;line-height:1;display:block}
   .price small{color:#d4af5a;font-size:12px;letter-spacing:.2em;font-weight:700}
 </style></head><body><div class="photo"></div><div class="fade"></div>
-<div class="txt"><div class="k">Championship Boxing Conditioning · Oxnard, CA</div><h1>Sahil<span>Gujjar</span></h1><p>Train like a fighter. <b>Live with energy.</b></p></div>
+<div class="txt"><div class="k">Championship Boxing Conditioning · Ventura, CA</div><h1>Sahil<span>Gujjar</span></h1><p>Train like a fighter. <b>Live with energy.</b></p></div>
 <div class="price"><div><strong>$100</strong><small>PER MONTH</small></div></div><div class="ropes"></div></body></html>`;
 
 const icon = (size) => `<!doctype html><html><head>${fonts}<style>
