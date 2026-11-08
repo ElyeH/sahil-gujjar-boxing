@@ -14,6 +14,7 @@ const photos = {
   '7.jpg': 'sparring-gear',
   '10.jpg': 'in-the-ring',
   '11.jpg': 'gold-boots',
+  '13.jpg': 'tyler-sparring',
 };
 const widths = [480, 800, 1200, 1600, 2000];
 const out = 'site/assets/img';
