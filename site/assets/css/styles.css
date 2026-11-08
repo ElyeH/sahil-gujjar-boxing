@@ -487,6 +487,7 @@ p { margin: 0 0 1.1em; }
   border-radius: var(--radius);
 }
 .no-ring h3 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.05; margin: 0 0 0.75rem; }
+.no-ring h3 .accent { color: var(--gold); }
 .no-ring p:last-child { margin: 0; color: var(--muted); max-width: 62ch; }
 .no-ring .btn { justify-self: start; }
 @media (min-width: 900px) {
