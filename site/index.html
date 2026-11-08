@@ -34,8 +34,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap">
 
-  <link rel="preload" as="image" type="image/webp"
-        imagesrcset="assets/img/sahil-guard-800.webp 800w, assets/img/sahil-guard-1200.webp 1200w, assets/img/sahil-guard-1600.webp 1600w, assets/img/sahil-guard-2000.webp 2000w"
+  <link rel="preload" as="image" type="image/webp" media="(max-width: 799px)"
+        imagesrcset="assets/img/hero-solo-480.webp 480w, assets/img/hero-solo-800.webp 800w, assets/img/hero-solo-1200.webp 1200w"
+        imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" media="(min-width: 800px)"
+        imagesrcset="assets/img/hero-wide-1200.webp 1200w, assets/img/hero-wide-1600.webp 1600w, assets/img/hero-wide-2400.webp 2400w"
         imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script>document.documentElement.classList.add('js');</script>
@@ -118,13 +121,18 @@
     <!-- ============ HERO ============ -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__media">
-        <img
-          src="assets/img/sahil-guard-1200.webp"
-          srcset="assets/img/sahil-guard-480.webp 480w, assets/img/sahil-guard-800.webp 800w, assets/img/sahil-guard-1200.webp 1200w, assets/img/sahil-guard-1600.webp 1600w, assets/img/sahil-guard-2000.webp 2000w"
-          sizes="100vw"
-          width="1200" height="1600"
-          fetchpriority="high" decoding="async"
-          alt="Sahil Gujjar with his hands up in a fighting stance at the Boxing Laboratory gym, beside a fellow boxer in red gloves.">
+        <picture>
+          <source media="(min-width: 800px)" type="image/webp"
+                  srcset="assets/img/hero-wide-1200.webp 1200w, assets/img/hero-wide-1600.webp 1600w, assets/img/hero-wide-2400.webp 2400w"
+                  sizes="100vw" width="2400" height="1500">
+          <img
+            src="assets/img/hero-solo-800.webp"
+            srcset="assets/img/hero-solo-480.webp 480w, assets/img/hero-solo-800.webp 800w, assets/img/hero-solo-1200.webp 1200w"
+            sizes="100vw"
+            width="1200" height="2733"
+            fetchpriority="high" decoding="async"
+            alt="Sahil Gujjar with his hands up in a fighting stance at the Boxing Laboratory gym.">
+        </picture>
       </div>
       <div class="container hero__inner">
         <div class="hero__content">

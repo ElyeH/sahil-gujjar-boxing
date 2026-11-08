@@ -4,12 +4,12 @@ import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
 import sharp from 'sharp';
 
-const hero = readFileSync('site/assets/img/sahil-guard-1200.webp').toString('base64');
+const hero = readFileSync('site/assets/img/hero-solo-1200.webp').toString('base64');
 const fonts = `<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&display=block" rel="stylesheet">`;
 
 const og = `<!doctype html><html><head>${fonts}<style>
   body{margin:0;width:1200px;height:630px;background:#0a0a0b;overflow:hidden;font-family:Inter,sans-serif;position:relative}
-  .photo{position:absolute;right:0;top:0;width:640px;height:630px;background:url(data:image/webp;base64,${hero}) 82% 22%/cover}
+  .photo{position:absolute;right:0;top:0;width:640px;height:630px;background:url(data:image/webp;base64,${hero}) 50% 12%/cover}
   .fade{position:absolute;inset:0;background:linear-gradient(90deg,#0a0a0b 42%,rgba(10,10,11,.75) 58%,rgba(10,10,11,.1) 85%)}
   .txt{position:absolute;left:72px;top:92px;color:#f4efe6}
   .k{color:#d4af5a;font-weight:700;letter-spacing:.24em;font-size:20px;text-transform:uppercase}

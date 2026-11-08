@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "images": "node scripts/build-images.mjs",
+    "images": "node scripts/build-images.mjs && node scripts/build-hero.mjs",
     "assets": "node scripts/render-assets.mjs",
     "start": "node scripts/serve.mjs",
     "check": "node scripts/check.mjs",
