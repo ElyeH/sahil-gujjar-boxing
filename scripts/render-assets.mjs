@@ -1,4 +1,4 @@
-// Renders og-image.jpg and PNG icons into site/ using headless Chromium.
+// Renders og-sahil.jpg and PNG icons into site/ using headless Chromium.
 // Run: npm run assets
 import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
@@ -37,7 +37,7 @@ await page.setViewportSize({ width: 1200, height: 630 });
 await page.setContent(og, { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
 const ogPng = await page.screenshot({ type: 'png' });
-await sharp(ogPng).jpeg({ quality: 84, mozjpeg: true }).toFile('site/og-image.jpg');
+await sharp(ogPng).jpeg({ quality: 84, mozjpeg: true }).toFile('site/og-sahil.jpg');
 
 for (const [file, size] of [['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512], ['favicon-32.png', 32]]) {
   const render = Math.max(size, 128);
@@ -48,4 +48,4 @@ for (const [file, size] of [['apple-touch-icon.png', 180], ['icon-192.png', 192]
   await sharp(png).resize(size, size).png().toFile(`site/${file}`);
 }
 await browser.close();
-console.log('Rendered og-image.jpg and icons');
+console.log('Rendered og-sahil.jpg and icons');

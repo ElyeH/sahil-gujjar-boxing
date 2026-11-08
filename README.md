@@ -66,7 +66,7 @@ All copy is in `site/index.html`.
 ## Photos
 Put originals in `src-photos/`, map each file to a name in `scripts/build-images.mjs`, then run `npm run images`. This rotates, resizes (480–2000px), converts to WebP and strips metadata, including the GPS location phones embed. `src-photos/` is git-ignored for that reason.
 
-`npm run assets` re-renders the share image (`og-image.jpg`) and icons.
+`npm run assets` re-renders the share image (`og-sahil.jpg`) and icons.
 
 ## Quality checks
 With `npm start` running in another terminal:
