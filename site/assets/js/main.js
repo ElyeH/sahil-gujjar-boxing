@@ -18,7 +18,7 @@
   const toggle = $('.nav-toggle');
   const nav = $('#site-nav');
   const outside = [$('#main'), $('.site-footer'), $('[data-mobile-cta]')].filter(Boolean);
-  const desktop = window.matchMedia('(min-width: 1000px)');
+  const desktop = window.matchMedia('(min-width: 1100px)');
 
   const setMenu = (open, { returnFocus = true } = {}) => {
     toggle.setAttribute('aria-expanded', String(open));
@@ -189,19 +189,22 @@
       !v.trim() ? 'Please enter your email address.' : !emailRe.test(v.trim()) ? 'Please enter a valid email, like name@example.com.' : '',
     phone: (v) => (v.trim() && v.replace(/\D/g, '').length < 10 ? 'Please enter a full phone number, or leave this blank.' : ''),
     interest: (v) => (!v ? 'Please choose what you’re interested in.' : ''),
+    training: (v) => (!v ? 'Please choose how you’d like to train.' : ''),
     experience: (v) => (!v ? 'Please choose your experience level.' : ''),
     message: (v) => (v.trim().length < 10 ? 'Please write a short message (at least 10 characters).' : ''),
   };
 
+  const radioGroups = ['training', 'experience'];
+  const isRadio = (name) => radioGroups.includes(name);
   const errorEl = (name) => (name === 'experience' ? $('#f-exp-err') : $(`#f-${name}-err`));
 
   const validateField = (name) => {
-    const value = name === 'experience' ? (form.querySelector('[name="experience"]:checked') || {}).value || '' : form.elements[name].value;
+    const value = isRadio(name) ? (form.querySelector(`[name="${name}"]:checked`) || {}).value || '' : form.elements[name].value;
     const msg = rules[name](value);
     errorEl(name).textContent = msg;
-    if (name === 'experience') {
-      $('[data-group="experience"]').setAttribute('aria-invalid', String(!!msg));
-      $$('[name="experience"]', form).forEach((r) => r.setAttribute('aria-invalid', String(!!msg)));
+    if (isRadio(name)) {
+      $(`[data-group="${name}"]`).setAttribute('aria-invalid', String(!!msg));
+      $$(`[name="${name}"]`, form).forEach((r) => r.setAttribute('aria-invalid', String(!!msg)));
     } else {
       form.elements[name].setAttribute('aria-invalid', String(!!msg));
     }
@@ -209,13 +212,13 @@
   };
 
   const firstInvalidControl = (name) =>
-    name === 'experience' ? form.querySelector('[name="experience"]') : form.elements[name];
+    isRadio(name) ? form.querySelector(`[name="${name}"]`) : form.elements[name];
 
   Object.keys(rules).forEach((name) => {
-    const controls = name === 'experience' ? $$('[name="experience"]', form) : [form.elements[name]];
+    const controls = isRadio(name) ? $$(`[name="${name}"]`, form) : [form.elements[name]];
     controls.forEach((c) => {
-      c.addEventListener('blur', () => { if (name !== 'experience' && c.value || c.getAttribute('aria-invalid') === 'true') validateField(name); });
-      c.addEventListener('change', () => { if (c.getAttribute('aria-invalid') === 'true' || name === 'experience') validateField(name); });
+      c.addEventListener('blur', () => { if (!isRadio(name) && c.value || c.getAttribute('aria-invalid') === 'true') validateField(name); });
+      c.addEventListener('change', () => { if (c.getAttribute('aria-invalid') === 'true' || isRadio(name)) validateField(name); });
       c.addEventListener('input', () => { if (c.getAttribute('aria-invalid') === 'true') validateField(name); });
     });
   });
@@ -251,7 +254,7 @@
         `Email: ${data.get('email')}`,
       ];
       if (data.get('phone')) lines.push(`Phone: ${data.get('phone')}`);
-      lines.push(`Interested in: ${data.get('interest')}`, `Experience: ${data.get('experience')}`, '', data.get('message'));
+      lines.push(`Interested in: ${data.get('interest')}`, `Training: ${data.get('training')}`, `Experience: ${data.get('experience')}`, '', data.get('message'));
       const waUrl = `https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
       const waLink = $('[data-wa-link]', success);
       if (waLink) waLink.href = waUrl;

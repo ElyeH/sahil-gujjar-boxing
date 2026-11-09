@@ -86,7 +86,7 @@ for (const [name, width, height] of viewports) {
   await page.locator('#contact').scrollIntoViewIfNeeded();
   await page.click('form[name="contact"] [type="submit"]');
   const errs = await page.$$eval('.field__error', (els) => els.filter((e) => e.textContent.trim()).length);
-  if (errs !== 5) problems.push(`form: expected 5 errors on empty submit, got ${errs}`);
+  if (errs !== 6) problems.push(`form: expected 6 errors on empty submit, got ${errs}`);
   const active = await page.evaluate(() => document.activeElement.id);
   if (active !== 'f-name') problems.push(`form: focus went to ${active}`);
   await page.locator('.form-card').screenshot({ path: `${out}/form-errors.png` });
@@ -98,6 +98,7 @@ for (const [name, width, height] of viewports) {
   if ((await page.getAttribute('#f-email', 'aria-invalid')) !== 'true') problems.push('form: bad email accepted');
   await page.fill('#f-email', 'client@example.com');
   await page.selectOption('#f-interest', { index: 1 });
+  await page.check('#train-online', { force: true });
   await page.check('#exp-some', { force: true });
   await page.fill('#f-message', 'I want more energy and to learn real boxing.');
   await page.click('form[name="contact"] [type="submit"]');
