@@ -1,4 +1,4 @@
-// Renders og-sahil.jpg and PNG icons into site/ using headless Chromium.
+// Renders og-share.jpg and PNG icons into site/ using headless Chromium.
 // Run: npm run assets
 import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
@@ -23,7 +23,7 @@ const og = `<!doctype html><html><head>${fonts}<style>
   .price small{color:#d4af5a;font-size:12px;letter-spacing:.2em;font-weight:700}
 </style></head><body><div class="photo"></div><div class="fade"></div>
 <div class="txt"><div class="k">Championship Boxing Conditioning · Ventura, CA</div><h1>Sahil<span>Gujjar</span></h1><p>Train like a fighter. <b>Live with energy.</b></p></div>
-<div class="price"><div><strong>$100</strong><small>PER MONTH</small></div></div><div class="ropes"></div></body></html>`;
+<div class="price"><div><strong>1:1</strong><small>COACHING</small></div></div><div class="ropes"></div></body></html>`;
 
 const icon = (size) => `<!doctype html><html><head>${fonts}<style>
   body{margin:0;width:${size}px;height:${size}px;background:#c8102e;display:grid;place-items:center;box-shadow:inset 0 0 0 ${Math.round(size * 0.06)}px #d4af5a}
@@ -37,7 +37,7 @@ await page.setViewportSize({ width: 1200, height: 630 });
 await page.setContent(og, { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
 const ogPng = await page.screenshot({ type: 'png' });
-await sharp(ogPng).jpeg({ quality: 84, mozjpeg: true }).toFile('site/og-sahil.jpg');
+await sharp(ogPng).jpeg({ quality: 84, mozjpeg: true }).toFile('site/og-share.jpg');
 
 for (const [file, size] of [['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512], ['favicon-32.png', 32]]) {
   const render = Math.max(size, 128);
@@ -48,4 +48,4 @@ for (const [file, size] of [['apple-touch-icon.png', 180], ['icon-192.png', 192]
   await sharp(png).resize(size, size).png().toFile(`site/${file}`);
 }
 await browser.close();
-console.log('Rendered og-sahil.jpg and icons');
+console.log('Rendered og-share.jpg and icons');

@@ -1,4 +1,4 @@
-// Builds scripts/og-photo.webp, the photo used in the link-preview image (og-sahil.jpg):
+// Builds scripts/og-photo.webp, the photo used in the link-preview image (og-share.jpg):
 // src-photos/8.jpg cropped so only Sahil is in frame. Run: npm run images
 import sharp from 'sharp';
 
